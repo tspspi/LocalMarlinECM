@@ -15,9 +15,9 @@ PSUs via different I/O pins.
 
 Normally it is controlled via three M-codes:
 
--M86 [n]: Switches the power supply [n] (numbering is done from A to Z) on
--M87 [n]: Switches the power supply [n] off
--M88 [n]: Returns the status for the power supply [n]
+- M86 [n]: Switches the power supply [n] (numbering is done from A to Z) on
+- M87 [n]: Switches the power supply [n] off
+- M88 [n]: Returns the status for the power supply [n]
 
 Additionally the extension can be configured to automatically
 switch a power supply whenever a bed temperature larger than
