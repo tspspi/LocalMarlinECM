@@ -586,7 +586,7 @@
                                         X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
 */
 // #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-#define DEFAULT_MAX_ACCELERATION      { 1000, 1000, 15, 9000 }
+#define DEFAULT_MAX_ACCELERATION      { 750, 750, 15, 9000 }
 
 /**
    Default Acceleration (change/s) change = mm/s
@@ -596,9 +596,9 @@
      M204 R    Retract Acceleration
      M204 T    Travel Acceleration
 */
-#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          750    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   750    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
    Default Jerk (mm/s)
@@ -608,8 +608,8 @@
    When changing speed and direction, if the difference is less than the
    value set here, it may happen instantaneously.
 */
-#define DEFAULT_XJERK                   1 /* reduced from 5 */
-#define DEFAULT_YJERK                  1 /* reduced from 5 */
+#define DEFAULT_XJERK                  0.6 /* reduced from 5 */
+#define DEFAULT_YJERK                  0.6 /* reduced from 5 */
 #define DEFAULT_ZJERK                  0.1
 #define DEFAULT_EJERK                  2.5 /* reduced from 5 */
 
@@ -828,7 +828,7 @@
 
 // The size of the print bed
 #define X_BED_SIZE 115 /* 114 */
-#define Y_BED_SIZE 170 /* 92 */ /* 205 -> 150 @ 20191108 */ /* -> 180 @ 20201010; Linited because of Y forces ... */
+#define Y_BED_SIZE 155 /* 92 */ /* 205 -> 150 @ 20191108 */ /* -> gradually 180, 165, 155 @ 20201010; Linited because of Y forces (skipping) ... */
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0 /* 19 */
