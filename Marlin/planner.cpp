@@ -159,7 +159,7 @@ float Planner::previous_speed[NUM_AXIS],
       Planner::previous_nominal_speed;
 
 #if ENABLED(DISABLE_INACTIVE_EXTRUDER)
-  uint8_t Planner::g_uc_extruder_last_move[EXTRUDERS] = { 0 };
+  uint8_t Planner::g_uc_extruder_last_move[EXTRUDERS] = { };
 #endif
 
 #ifdef XY_FREQUENCY_LIMIT

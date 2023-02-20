@@ -608,12 +608,17 @@
 #define __EPIN(p,q) E##p##_##q##_PIN
 #define _EPIN(p,q) __EPIN(p,q)
 
+#define STR(x) #x
+#define XSTR(x) STR(x)
+
 // The X2 axis, if any, should be the next open extruder port
 #if ENABLED(DUAL_X_CARRIAGE) || ENABLED(X_DUAL_STEPPER_DRIVERS)
   #ifndef X2_STEP_PIN
     #define X2_STEP_PIN   _EPIN(E_STEPPERS, STEP)
-    #define X2_DIR_PIN    _EPIN(E_STEPPERS, DIR)
+    // #define X2_DIR_PIN    _EPIN(E_STEPPERS, DIR)
+    #define X2_DIR_PIN    28
     #define X2_ENABLE_PIN _EPIN(E_STEPPERS, ENABLE)
+    #pragma message "X2 step: " XSTR(X2_STEP_PIN) ", X2 dir: " XSTR(X2_DIR_PIN) ", X2 enable: " XSTR(X2_ENABLE_PIN)
     #if E_STEPPERS > 4 || !PIN_EXISTS(X2_ENABLE)
       #error "No E stepper plug left for X2!"
     #endif
@@ -629,8 +634,10 @@
 #if ENABLED(Y_DUAL_STEPPER_DRIVERS)
   #ifndef Y2_STEP_PIN
     #define Y2_STEP_PIN   _EPIN(Y2_E_INDEX, STEP)
-    #define Y2_DIR_PIN    _EPIN(Y2_E_INDEX, DIR)
+    // #define Y2_DIR_PIN    _EPIN(Y2_E_INDEX, DIR)
+    #define Y2_DIR_PIN 34
     #define Y2_ENABLE_PIN _EPIN(Y2_E_INDEX, ENABLE)
+    #pragma message "Y2 step: " XSTR(Y1_STEP_PIN) ", Y2 dir: " XSTR(Y2_DIR_PIN) ", Y2 enable: " XSTR(Y2_ENABLE_PIN)
     #if Y2_E_INDEX > 4 || !PIN_EXISTS(Y2_ENABLE)
       #error "No E stepper plug left for Y2!"
     #endif

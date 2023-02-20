@@ -59,10 +59,10 @@ Temperature thermalManager;
 
 // public:
 
-float Temperature::current_temperature[HOTENDS] = { 0.0 },
+float Temperature::current_temperature[HOTENDS] = { },
       Temperature::current_temperature_bed = 0.0;
-int16_t Temperature::current_temperature_raw[HOTENDS] = { 0 },
-        Temperature::target_temperature[HOTENDS] = { 0 },
+int16_t Temperature::current_temperature_raw[HOTENDS] = { },
+        Temperature::target_temperature[HOTENDS] = { },
         Temperature::current_temperature_bed_raw = 0;
 
 #if HAS_HEATER_BED
@@ -118,8 +118,8 @@ int16_t Temperature::current_temperature_raw[HOTENDS] = { 0 },
 volatile bool Temperature::temp_meas_ready = false;
 
 #if ENABLED(PIDTEMP)
-  float Temperature::temp_iState[HOTENDS] = { 0 },
-        Temperature::temp_dState[HOTENDS] = { 0 },
+  float Temperature::temp_iState[HOTENDS] = { },
+        Temperature::temp_dState[HOTENDS] = { },
         Temperature::pTerm[HOTENDS],
         Temperature::iTerm[HOTENDS],
         Temperature::dTerm[HOTENDS];
@@ -152,7 +152,7 @@ uint16_t Temperature::raw_temp_value[MAX_EXTRUDERS] = { 0 },
 // Init min and max temp with extreme values to prevent false errors during startup
 int16_t Temperature::minttemp_raw[HOTENDS] = ARRAY_BY_HOTENDS(HEATER_0_RAW_LO_TEMP , HEATER_1_RAW_LO_TEMP , HEATER_2_RAW_LO_TEMP, HEATER_3_RAW_LO_TEMP, HEATER_4_RAW_LO_TEMP),
         Temperature::maxttemp_raw[HOTENDS] = ARRAY_BY_HOTENDS(HEATER_0_RAW_HI_TEMP , HEATER_1_RAW_HI_TEMP , HEATER_2_RAW_HI_TEMP, HEATER_3_RAW_HI_TEMP, HEATER_4_RAW_HI_TEMP),
-        Temperature::minttemp[HOTENDS] = { 0 },
+        Temperature::minttemp[HOTENDS] = { },
         Temperature::maxttemp[HOTENDS] = ARRAY_BY_HOTENDS1(16383);
 
 #ifdef MAX_CONSECUTIVE_LOW_TEMPERATURE_ERROR_ALLOWED
@@ -196,8 +196,8 @@ uint8_t Temperature::soft_pwm_amount[HOTENDS],
 #endif
 
 #if HEATER_IDLE_HANDLER
-  millis_t Temperature::heater_idle_timeout_ms[HOTENDS] = { 0 };
-  bool Temperature::heater_idle_timeout_exceeded[HOTENDS] = { false };
+  millis_t Temperature::heater_idle_timeout_ms[HOTENDS] = { };
+  bool Temperature::heater_idle_timeout_exceeded[HOTENDS] = { };
   #if HAS_TEMP_BED
     millis_t Temperature::bed_idle_timeout_ms = 0;
     bool Temperature::bed_idle_timeout_exceeded = false;
@@ -876,9 +876,9 @@ void Temperature::manage_heater() {
 // For hot end temperature measurement.
 float Temperature::analog2temp(const int raw, const uint8_t e) {
   #if ENABLED(TEMP_SENSOR_1_AS_REDUNDANT)
-    if (e > HOTENDS)
+    if ((e > HOTENDS) && (HOTENDS != 0))
   #else
-    if (e >= HOTENDS)
+    if ((e >= HOTENDS) && (HOTENDS != 0))
   #endif
     {
       SERIAL_ERROR_START();

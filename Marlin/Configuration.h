@@ -74,7 +74,7 @@
 // User-specified version info of this build to display in [Pronterface, etc] terminal window during
 // startup. Implementation of an idea by Prof Braino to inform user that any changes made to this
 // build by the user have been successfully uploaded into firmware.
-#define STRING_CONFIG_H_AUTHOR "(TSP, quetsch config 20180225)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(TSP, elektroquetsch config 20230205)" // Who made the changes.
 // #define SHOW_BOOTSCREEN
 #define STRING_SPLASH_LINE1 SHORT_BUILD_VERSION // will be shown during bootup in line 1
 #define STRING_SPLASH_LINE2 WEBSITE_URL         // will be shown during bootup in line 2
@@ -125,18 +125,19 @@
 
 // Optional custom name for your RepStrap or other custom machine
 // Displayed in the LCD "Ready" message
-#define CUSTOM_MACHINE_NAME "Quetschprinter 0.2"
+#define CUSTOM_MACHINE_NAME "Elektroquetsch Uno"
 
 // Define this to set a unique identifier for this printer, (Used by some programs to differentiate between machines)
 // You can use an online service to generate a random UUID. (eg http://www.uuidgenerator.net/version4)
 //#define MACHINE_UUID "00000000-0000-0000-0000-000000000000"
-#define MACHINE_UUID "743ED058-B591-40C5-920A-B9D1EDFC3ED0"
+#define MACHINE_UUID "19c85db0-a4e4-11ed-b613-70f3950389a2"
 
 // @section extruder
 
 // This defines the number of extruders
 // :[1, 2, 3, 4, 5]
-#define EXTRUDERS 1
+#define EXTRUDERS 0
+// #define NO_EXTRUDERS
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
@@ -231,9 +232,9 @@
 #define POWER_SUPPLY 1
 
 #if POWER_SUPPLY > 0
-// Enable this option to leave the PSU off at startup.
-// Power to steppers and heaters will need to be turned on with M80.
-#define PS_DEFAULT_OFF
+   // Enable this option to leave the PSU off at startup.
+   // Power to steppers and heaters will need to be turned on with M80.
+   #define PS_DEFAULT_OFF
 #endif
 
 /*
@@ -242,12 +243,12 @@
 #define HAS_MULTIPLE_ADDITIONAL_PSU  1
 
 #if defined(HAS_MULTIPLE_ADDITIONAL_PSU)
-#define MULTIPSU_ON     LOW
-#define MULTIPSU_SLEEP  HIGH
+   #define MULTIPSU_ON     LOW
+   #define MULTIPSU_SLEEP  HIGH
 
-// By default use D47 on AUX-4 pin
-#define MULTIPSU_PSU1_PIN 47
-// #define MULTIPSU_PSU2_PIN  45
+   // By default use D47 on AUX-4 pin
+   #define MULTIPSU_PSU1_PIN 47
+   // #define MULTIPSU_PSU2_PIN  45
 #endif
 
 /*
@@ -313,7 +314,7 @@
 #define TEMP_SENSOR_2 0
 #define TEMP_SENSOR_3 0
 #define TEMP_SENSOR_4 0
-#define TEMP_SENSOR_BED 11
+#define TEMP_SENSOR_BED 0
 
 // Dummy thermistor constant temperature readings, for use with 998 and 999
 #define DUMMY_THERMISTOR_998_VALUE 25
@@ -360,7 +361,7 @@
 // PID Tuning Guide here: http://reprap.org/wiki/PID_Tuning
 
 // Comment the following line to disable PID and enable bang-bang.
-#define PIDTEMP
+//#define PIDTEMP
 #define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within the PID
@@ -405,7 +406,7 @@
 // If your configuration is significantly different than this and you don't understand the issues involved, you probably
 // shouldn't use bed PID until someone else verifies your hardware works.
 // If this is enabled, find your own PID constants below.
-#define PIDTEMPBED
+//#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -471,8 +472,8 @@
    details can be tuned in Configuration_adv.h
 */
 
-#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
-#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
+//#define THERMAL_PROTECTION_HOTENDS // Enable thermal protection for all extruders
+//#define THERMAL_PROTECTION_BED     // Enable thermal protection for the heated bed
 
 //===========================================================================
 //============================= Mechanical Settings =========================
@@ -501,9 +502,9 @@
 #define USE_XMIN_PLUG
 #define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
-//#define USE_XMAX_PLUG
-//#define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_XMAX_PLUG
+#define USE_YMAX_PLUG
+#define USE_ZMAX_PLUG
 
 // coarse Endstop Settings
 // #define ENDSTOPPULLUPS // Comment this out (using // at the start of the line) to disable the endstop pullup resistors
@@ -513,8 +514,8 @@
 //#define ENDSTOPPULLUP_XMAX
 //#define ENDSTOPPULLUP_YMAX
 //#define ENDSTOPPULLUP_ZMAX
-#define ENDSTOPPULLUP_XMIN
-#define ENDSTOPPULLUP_YMIN
+//#define ENDSTOPPULLUP_XMIN
+//#define ENDSTOPPULLUP_YMIN
 //#define ENDSTOPPULLUP_ZMIN
 //#define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
@@ -557,27 +558,15 @@
    Override with M92
                                         X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
 */
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 4000, 500 } // TSP
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 85, 85, 2560, 102 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 78, 85, 3413, 102 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 78, 78, 418, 95 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 81, 119, 398, 95 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 81.236378, 79.9731177, 398, 95 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 79.643507843137254901960784313725, 78.985795259259259259259259259259, 413.02731030665721154677689952782*(30.0/29.0)*(20.0/20.8), 95 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 79.643507843137254901960784313725, 78.985795259259259259259259259259, 413.02731030665721154677689952782*(30.0/29.0)*(20.0/20.8)*0.966184, 95 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 79.643507843137254901960784313725, 78.985795259259259259259259259259, 396.943347594, 95 }
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 79, 397, 95 } /* TSP 20191108 */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 79, 80, 403, 95 } /* TSP 20191114 */
-
-// #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 78.985795259259259259259259259259, 413.02731030665721154677689952782*(30.0/29.0)*(20.0/20.8), 95 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 413*5.26, 413*5.26, 413, 1 } /* TSP 20230205 */
 
 /**
    Default Max Feed Rate (mm/s)
    Override with M203
                                         X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
 */
-// #define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }  // TSP
-#define DEFAULT_MAX_FEEDRATE          { 100, 100, 2, 25 }
+// #define DEFAULT_MAX_FEEDRATE          { 300, 300, 300, 25 }  // TSP
+#define DEFAULT_MAX_FEEDRATE          { 4, 4, 20, 25 }
 
 /**
    Default Max Acceleration (change/s) change = mm/s
@@ -585,8 +574,8 @@
    Override with M201
                                         X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
 */
-// #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 10000 }
-#define DEFAULT_MAX_ACCELERATION      { 750, 750, 15, 9000 }
+// #define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 3000, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 150, 150, 150, 9000 }
 
 /**
    Default Acceleration (change/s) change = mm/s
@@ -596,9 +585,9 @@
      M204 R    Retract Acceleration
      M204 T    Travel Acceleration
 */
-#define DEFAULT_ACCELERATION          750    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          150    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   750    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   150    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
    Default Jerk (mm/s)
@@ -608,10 +597,10 @@
    When changing speed and direction, if the difference is less than the
    value set here, it may happen instantaneously.
 */
-#define DEFAULT_XJERK                  0.6 /* reduced from 5 */
-#define DEFAULT_YJERK                  0.6 /* reduced from 5 */
-#define DEFAULT_ZJERK                  0.1
-#define DEFAULT_EJERK                  2.5 /* reduced from 5 */
+#define DEFAULT_XJERK                  1
+#define DEFAULT_YJERK                  1
+#define DEFAULT_ZJERK                  1
+#define DEFAULT_EJERK                  5
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -827,8 +816,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 115 /* 114 */
-#define Y_BED_SIZE 155 /* 92 */ /* 205 -> 150 @ 20191108 */ /* -> gradually 180, 165, 155 @ 20201010; Linited because of Y forces (skipping) ... */
+#define X_BED_SIZE 1000 /* 114 */
+#define Y_BED_SIZE 1000 /* 92 */ /* 205 -> 150 @ 20191108 */ /* -> gradually 180, 165, 155 @ 20201010; Linited because of Y forces (skipping) ... */
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0 /* 19 */
@@ -856,7 +845,7 @@
   #endif */
 
 // Max software endstops curtail movement above maximum coordinate bounds
-#define MAX_SOFTWARE_ENDSTOPS
+//#define MAX_SOFTWARE_ENDSTOPS
 #if ENABLED(MAX_SOFTWARE_ENDSTOPS)
 #define MAX_SOFTWARE_ENDSTOP_X
 #define MAX_SOFTWARE_ENDSTOP_Y
