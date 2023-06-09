@@ -727,10 +727,10 @@
 #define XY_PROBE_SPEED HOMING_FEEDRATE_XY
 
 // Speed for the first approach when double-probing (MULTIPLE_PROBING == 2)
-#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z*2
+#define Z_PROBE_SPEED_FAST HOMING_FEEDRATE_Z
 
 // Speed for the "accurate" probe of each point
-#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST / 1.2)
+#define Z_PROBE_SPEED_SLOW (Z_PROBE_SPEED_FAST)
 
 // The number of probes to perform at each point.
 //   Set to 2 for a fast/slow probe, using the second probe result.
@@ -816,16 +816,16 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 1000 /* 114 */
-#define Y_BED_SIZE 1000 /* 92 */ /* 205 -> 150 @ 20191108 */ /* -> gradually 180, 165, 155 @ 20201010; Linited because of Y forces (skipping) ... */
+#define X_BED_SIZE 240
+#define Y_BED_SIZE 250
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
-#define X_MIN_POS 0 /* 19 */
-#define Y_MIN_POS 0 /* 5; TSP 20190916 from 0->7 */
-#define Z_MIN_POS 0  /* 0 */
+#define X_MIN_POS 0
+#define Y_MIN_POS 0
+#define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 380
+#define Z_MAX_POS 51
 
 /**
    Software Endstops
@@ -1081,13 +1081,15 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-#define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
-#define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
+// #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
+// #define Z_SAFE_HOMING_Y_POINT ((Y_BED_SIZE) / 2)    // Y point for Z homing when homing all axes (G28).
+#define Z_SAFE_HOMING_X_POINT 0
+#define Z_SAFE_HOMING_Y_POINT 0
 #endif
 
 // Homing speeds (mm/m)
-#define HOMING_FEEDRATE_XY (450)
-#define HOMING_FEEDRATE_Z  1.5*(2*60)
+#define HOMING_FEEDRATE_XY 170
+#define HOMING_FEEDRATE_Z  170
 
 // @section calibrate
 
@@ -1211,13 +1213,13 @@
       P1  Raise the nozzle always to Z-park height.
       P2  Raise the nozzle by Z-park amount, limited to Z_MAX_POS.
 */
-//#define NOZZLE_PARK_FEATURE
+#define NOZZLE_PARK_FEATURE
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
 // Specify a park position as { X, Y, Z }
-#define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
-#define NOZZLE_PARK_XY_FEEDRATE 100   // X and Y axes feedrate in mm/s (also used for delta printers Z axis)
-#define NOZZLE_PARK_Z_FEEDRATE 5      // Z axis feedrate in mm/s (not used for delta printers)
+#define NOZZLE_PARK_POINT { 5, 5, 51 }
+#define NOZZLE_PARK_XY_FEEDRATE 170   // X and Y axes feedrate in mm/s (also used for delta printers Z axis)
+#define NOZZLE_PARK_Z_FEEDRATE 300      // Z axis feedrate in mm/s (not used for delta printers)
 #endif
 
 /**
